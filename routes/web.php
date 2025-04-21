@@ -1,5 +1,6 @@
 <?php
 
+use Drake24\Lynx\Lynx;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -7,9 +8,9 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
-Route::get('/lynx', function () {
-    $lynx = app(\Drake24\Lynx::class);
-    return $lynx->connect();
+Route::get('test', function () {
+    info('test');
+    Lynx::connect();
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
