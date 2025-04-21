@@ -1,5 +1,6 @@
 <?php
 
+use Drake24\Lynx\Lynx;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -13,5 +14,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+Route::get('test', function () {
+    info('test');
+    Lynx::connect();
+});
+
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';
