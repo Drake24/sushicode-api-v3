@@ -29,7 +29,8 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Acme\\RandomStringGenerator\\": "packages/Acme/RandomStringGenerator/src"
+            "Acme\\RandomStringGenerator\\": "packages/Acme/RandomStringGenerator/src",
+            "Drake24\\Lynx\\": "packages/drake24/lynx/src/"
         }
     },
     "autoload-dev": {

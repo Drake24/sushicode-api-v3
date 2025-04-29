@@ -1,15 +1,26 @@
 <?php
 
 use Acme\RandomStringGenerator\RandomStringGenerator;
+use Drake24\Lynx\Lynx;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         info(RandomStringGenerator::generate(5));
+
+Route::get('test', function () {
+    info('test');
+    Lynx::connect();
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('dashboard', function () {
+        info('test');
         return Inertia::render('dashboard');
     })->name('dashboard');
 });
