@@ -38,5 +38,6 @@ class OAuthController extends Controller
 
         // todo
         // authenticate return token
+        $token = $googleUser->createToken('authToken');
     }
 }

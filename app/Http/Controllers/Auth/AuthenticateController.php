@@ -17,11 +17,15 @@ class AuthenticateController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            $user = Auth::user();
 
-            return redirect()->intended('dashboard');
+            /** @var \Laravel\Sanctum\HasApiTokens $user */
+            $token = $user->createToken('authToken');
+
+            return response()->json(['token' => $token]);
         }
 
+        // Todo
         return ApiResponse::error(
             'Invalid email or password.',
             401,
