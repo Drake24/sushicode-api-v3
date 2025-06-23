@@ -36,7 +36,7 @@ class OAuthController extends Controller
             'google_refresh_token' => $googleUser->refreshToken,
         ]);
 
-        // todo
+        // do something here
         // authenticate return token
         $token = $googleUser->createToken('authToken');
     }
