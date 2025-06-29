@@ -3,10 +3,11 @@
 namespace App\Http\Requests\Auth;
 
 use App\Models\User;
+use App\Exceptions\HttpValidationException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 
 class RegisterRequest extends FormRequest
 {
@@ -27,11 +28,6 @@ class RegisterRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        $response = response()->json([
-            'message' => 'The given data was invalid.',
-            'errors' => $validator->errors(),
-        ], 422);
-
-        throw new ValidationException($validator, $response);
+        throw new HttpValidationException($validator);
     }
 }

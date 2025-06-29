@@ -21,11 +21,9 @@ class AuthenticateController extends Controller
 
             /** @var \Laravel\Sanctum\HasApiTokens $user */
             $token = $user->createToken('authToken');
-
             return response()->json(['token' => $token]);
         }
 
-        // Todo
         return ApiResponse::error(
             'Invalid email or password.',
             401,
