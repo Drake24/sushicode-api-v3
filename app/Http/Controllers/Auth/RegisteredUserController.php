@@ -18,8 +18,9 @@ class RegisteredUserController extends Controller
 {
     public function index(Request $request)
     {
+        // return new UserCollection(User::get());
         $data = new UserCollection(User::get());
-        return ApiResponse::success($data);
+        return ApiResponse::success($data); // Todo
     }
 
     public function show(string $id)
@@ -30,7 +31,7 @@ class RegisteredUserController extends Controller
             return ApiResponse::error('User not found', 404);
         }
 
-        return ApiResponse::success($user);
+        return ApiResponse::success(new UserResource($user));
     }
 
     public function store(RegisterRequest $request): JsonResponse

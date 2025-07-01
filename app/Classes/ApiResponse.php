@@ -19,6 +19,13 @@ class ApiResponse
      */
     public static function success(array|Model|JsonResource $data = [], int $code = 200, string $message = 'Success', bool $flatten = false): JsonResponse
     {
+        // check for json resources i.e users, users/10 and needed to 
+        // be converted to $data->resolve() before merge
+        if ($data instanceof JsonResource) {
+            $data = $data->resolve();
+            $flatten = true;
+        }
+
         return response()->json(
             $flatten
                 ? array_merge($data, ['code' => $code, 'message' => $message])
