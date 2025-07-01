@@ -15,7 +15,9 @@ Route::get('/user', function (Request $request) {
 Route::post('register', [RegisteredUserController::class, 'store']);
 Route::post('login', [AuthenticateController::class, 'authenticate']);
 
+Route::apiResource('users', RegisteredUserController::class);
 
 Route::group(['middleware' => 'auth:api'], function () {
     // additional routes goes here
+
 });

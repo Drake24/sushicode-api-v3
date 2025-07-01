@@ -22,7 +22,6 @@ class OAuthController extends Controller
 
     public function oauthCallback()
     {
-
         $googleUser = Socialite::with('google')->stateless()->user();
 
         $googleUser = User::updateOrCreate([
