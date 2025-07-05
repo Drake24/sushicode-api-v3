@@ -16,6 +16,6 @@ class HttpValidationException extends Exception
     {
         $errorBag = $this->validator->errors()->toArray();
 
-        return ApiResponse::error($errorBag, 422, 'Oops there are errors in your form.');
+        return apiResponse()->error($errorBag, 422, 'Oops there are errors in your form.');
     }
 }

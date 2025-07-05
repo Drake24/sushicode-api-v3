@@ -3,35 +3,38 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Classes\ApiResponse;
+use App\Exceptions\HttpModelNotFoundException;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\UserListingRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Exception;
 
 class RegisteredUserController extends Controller
 {
-    public function index(Request $request)
+    public function index(UserListingRequest $request)
     {
-        // return new UserCollection(User::get());
-        $data = new UserCollection(User::get());
-        return ApiResponse::success($data); // Todo
+        $builder = $request->applyFilters(User::listing());
+
+        // return new UserCollection(User::paginate());
+        return apiResponse()->success($builder->get());
     }
 
-    public function show(string $id)
+    public function show(string $id): JsonResponse|Exception
     {
         try {
             $user = User::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            return ApiResponse::error('User not found', 404);
+            throw new HttpModelNotFoundException('User not found');
         }
 
-        return ApiResponse::success(new UserResource($user));
+        return apiResponse()->success(new UserResource($user));
     }
 
     public function store(RegisterRequest $request): JsonResponse

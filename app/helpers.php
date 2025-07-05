@@ -1,19 +1,14 @@
 <?php
 
 use App\Classes\ApiResponse;
-use Illuminate\Http\JsonResponse;
 
-if (!function_exists('success')) {
-
+if (!function_exists('apiResponse')) {
     /**
-     * Check the returned HTTP code from the service.
-     *
-     * @param array $data
-     *
-     * @return bool
+     * Return a new response from the application.
+     * Wrapper function. See ApiResponse::class
      */
-    function success($data, $code, $message, $flatten): JsonResponse
+    function apiResponse()
     {
-        return ApiResponse::success($data, $code, $message, $flatten);
+        return app(ApiResponse::class);
     }
 }

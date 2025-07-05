@@ -2,9 +2,10 @@
 
 namespace App\Classes;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class ApiResponse
 {
@@ -14,24 +15,11 @@ class ApiResponse
      * @param  array $data
      * @param  int $code
      * @param  string  $message
-     * @param  bool $flatten
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function success(array|Model|JsonResource $data = [], int $code = 200, string $message = 'Success', bool $flatten = false): JsonResponse
+    public static function success(array|Model|JsonResource|Collection $data = [], int $code = 200, string $message = 'Success'): JsonResponse
     {
-        // check for json resources i.e users, users/10 and needed to 
-        // be converted to $data->resolve() before merge
-        if ($data instanceof JsonResource) {
-            $data = $data->resolve();
-            $flatten = true;
-        }
-
-        return response()->json(
-            $flatten
-                ? array_merge($data, ['code' => $code, 'message' => $message])
-                : ['data' => $data, 'code' => $code, 'message' => $message],
-            $code
-        );
+        return response()->json(['data' => $data, 'code' => $code, 'message' => $message], $code);
     }
 
     /**

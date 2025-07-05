@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Classes\ApiResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -22,12 +21,12 @@ class AuthenticateController extends Controller
             /** @var \Laravel\Sanctum\HasApiTokens $user */
             $token = $user->createToken('authToken');
 
-            return ApiResponse::success([
+            return apiResponse()->success([
                 'user' => $user,
                 'token' => $token,
-            ], 200, 'Successfully authenticated user', true);
+            ], 200, 'Successfully authenticated user');
         }
 
-        return ApiResponse::error('Invalid email or password.', 401, 'Authentication failed');
+        return apiResponse()->error('Invalid email or password.', 401, 'Authentication failed');
     }
 }

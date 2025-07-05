@@ -10,7 +10,8 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'data' => $this->resource->attributesToArray(),
+            ...$this->resource->attributesToArray(),
+
             'relations' => $this->getRequiredRelations($request),
         ];
     }

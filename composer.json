@@ -34,7 +34,10 @@
             "Database\\Seeders\\": "database/seeders/",
             "Acme\\RandomStringGenerator\\": "packages/Acme/RandomStringGenerator/src",
             "Drake24\\Lynx\\": "packages/drake24/lynx/src/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
