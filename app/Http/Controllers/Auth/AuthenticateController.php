@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Values\Codes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -24,9 +25,9 @@ class AuthenticateController extends Controller
             return apiResponse()->success([
                 'user' => $user,
                 'token' => $token,
-            ], 200, 'Successfully authenticated user');
+            ], Codes::HTTP_OK, 'Successfully authenticated user');
         }
 
-        return apiResponse()->error('Invalid email or password.', 401, 'Authentication failed');
+        return apiResponse()->error('Invalid email or password.', Codes::HTTP_UNAUTHORIZED, 'Authentication failed');
     }
 }

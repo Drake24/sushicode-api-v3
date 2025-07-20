@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use App\Values\Codes;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,7 @@ class ApiResponse
      * @param  string  $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function success(array|Model|JsonResource|Collection $data = [], int $code = 200, string $message = 'Success'): JsonResponse
+    public static function success(array|Model|JsonResource|Collection $data = [], int $code = Codes::HTTP_OK, string $message = 'Success'): JsonResponse
     {
         return response()->json(['data' => $data, 'code' => $code, 'message' => $message], $code);
     }
@@ -30,7 +31,7 @@ class ApiResponse
      * @param  string $message
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function error(array|string $errors, int $code = 400, string $message = 'Oops something went wrong'): JsonResponse
+    public static function error(array|string $errors, int $code = Codes::HTTP_BAD_REQUEST, string $message = 'Oops something went wrong'): JsonResponse
     {
         return response()->json([
             'errors' => is_array($errors) ? $errors : ['message' => $errors],

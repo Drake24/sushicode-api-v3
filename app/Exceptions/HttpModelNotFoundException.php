@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Classes\ApiResponse;
+use App\Values\Codes;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
@@ -13,6 +13,6 @@ class HttpModelNotFoundException extends Exception
 
     public function render(Request $request): JsonResponse
     {
-        return apiResponse()->error($this->error, 404, 'Resource not found');
+        return apiResponse()->error($this->error, Codes::HTTP_NOT_FOUND, 'Resource not found');
     }
 }
