@@ -6,5 +6,5 @@ Laravel API to connect with Wordpress. The main support for Sushicode blog in ha
 1. Run composer install
 2. Run OAuth2 Server (Laravel Passport) using the commands below.
 
-php artisan passport:install
-php artisan config:clear
+php artisan migrate:fresh
+php artisan passport:client --personal (create a personal access client name)
