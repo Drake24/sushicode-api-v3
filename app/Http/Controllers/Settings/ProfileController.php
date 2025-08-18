@@ -19,9 +19,23 @@ class ProfileController extends Controller
         //     $request->user()->email_verified_at = null;
         // }
 
-        // $request->user()->save();
 
         // return to_route('profile.edit');
+    }
+
+    public function store(ProfileUpdateRequest $request)
+    {
+        // Todo
+        $request->user()->fill($request->validated());
+
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
+        }
+
+        $request->user()->name = $request->first_name . ' ' . $request->last_name;
+        $request->user()->save();
+
+        return apiResponse()->success(message: 'Profile updated');
     }
 
     /**
