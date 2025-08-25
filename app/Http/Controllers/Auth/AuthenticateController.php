@@ -25,6 +25,7 @@ class AuthenticateController extends Controller
             return apiResponse()->success([
                 'user' => $user,
                 'token' => $token,
+                'access_token' => $token->accessToken,
             ], Codes::HTTP_OK, 'Successfully authenticated user');
         }
 

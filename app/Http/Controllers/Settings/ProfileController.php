@@ -10,22 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    public function store(ProfileUpdateRequest $request) {}
     public function update(ProfileUpdateRequest $request)
     {
-        // Todo
-        // $request->user()->fill($request->validated());
-
-        // if ($request->user()->isDirty('email')) {
-        //     $request->user()->email_verified_at = null;
-        // }
-
-
-        // return to_route('profile.edit');
-    }
-
-    public function store(ProfileUpdateRequest $request)
-    {
-        // Todo
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -34,8 +21,9 @@ class ProfileController extends Controller
 
         $request->user()->name = $request->first_name . ' ' . $request->last_name;
         $request->user()->save();
+        $user = $request->user()->fresh();
 
-        return apiResponse()->success(message: 'Profile updated');
+        return apiResponse()->success(data: $user, message: 'Profile updated');
     }
 
     /**
